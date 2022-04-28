@@ -43,16 +43,75 @@ int displayMenu(){
 
 //call functions according to choice
 void takeAction(int choice, string fileName){
+    // opne file
+    ifstream file{fileName};
+    //content of file 
+    vector<string>fileContent;
+
+    //read file content in vector
+    readContent(file, fileContent);
+
     switch (choice){
     case 1:
-        // funciton call
+        //call function
         break;
-    
+    case 2:
+        //call function
+        break;
+    case 3:
+        //call function
+        break;
+    case 4:
+        //call function
+        break;
+    case 5:
+        //call function
+        break;
+    case 6:
+        //call function
+        break;
+    case 7:
+        // call function
+        break;
+    case 8:
+        //call function
+        break;
+    case 9:
+        //call function
+        break;
+    case 10:
+        //call function
+        break;
+     case 11:
+        //call function
+        break;
+    case 12:
+        //call function
+        break;
+    case 13:
+        //call function
+        break;
+    case 14:
+        //call function
+        break;
+    case 15:
+        //call function
+        break;
     case 16:
-    
         exit(0);
         break;
     default:
         break;
     }
+}
+
+void readContent(ifstream &file, vector<string> &fileContent){
+    string line;
+    //read line by line in vector
+    while(!file.eof()){
+        getline(file, line);
+        //add line to vector and add \n after each line;
+        fileContent.push_back(line + "\n");
+    }
+
 }
