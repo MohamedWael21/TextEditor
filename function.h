@@ -7,7 +7,12 @@ using namespace std;
 // all declaration and interface
 
 int displayMenu();
-void takeAction(int, string);
-void readContent(ifstream&, vector<string>&);
+void takeAction(int, vector<string>&, string&);
+void readContent(fstream&, vector<string>&);
+void countWord(vector<string>&);
+void toUpperFile(vector<string>&);
+void toLowerFile(vector<string>&);
+void toCapFile(vector<string>&);
+void saveFile(vector<string>&, string&);
 
 #endif

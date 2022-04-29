@@ -22,9 +22,11 @@ int main(){
     cout << "Please Enter File Name: ";
     cin >> fileName; // take filename from user
     
-    //check if file exists or not
-    fstream file{fileName, ios::in};
+    //open file for read and write
+    fstream file;
+    file.open(fileName);
 
+    //check if file exists or not
     if(file){
         cout << "This file is Already Exists.\n\n";
     }else{
@@ -32,14 +34,20 @@ int main(){
         file.open(fileName, ios::out);
         cout << "File " << fileName << " deos not exist. I created it for you.\n\n";
     }
-    // close file
-    file.close();
+ 
+    //content of file 
+    vector<string>fileContent;
 
+    //read file content in vector
+    readContent(file, fileContent);
+    
     // loop until user exit
     while(true){
         // show menu to user and take action according to
-        takeAction(displayMenu(), fileName);
+        takeAction(displayMenu(), fileContent, fileName);
         cout << "\n";
     }
+
+    file.close();
 
 }

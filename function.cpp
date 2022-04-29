@@ -42,15 +42,7 @@ int displayMenu(){
 }
 
 //call functions according to choice
-void takeAction(int choice, string fileName){
-    // opne file
-    ifstream file{fileName};
-    //content of file 
-    vector<string>fileContent;
-
-    //read file content in vector
-    readContent(file, fileContent);
-
+void takeAction(int choice, vector<string> &fileContent, string &FileName){
     switch (choice){
     case 1:
         //call function
@@ -83,19 +75,19 @@ void takeAction(int choice, string fileName){
         //call function
         break;
      case 11:
-        //call function
+        countWord(fileContent);
         break;
     case 12:
-        //call function
+        toUpperFile(fileContent);
         break;
     case 13:
-        //call function
+        toLowerFile(fileContent);
         break;
     case 14:
-        //call function
+        toCapFile(fileContent);
         break;
     case 15:
-        //call function
+        saveFile(fileContent, FileName);
         break;
     case 16:
         exit(0);
@@ -103,15 +95,158 @@ void takeAction(int choice, string fileName){
     default:
         break;
     }
+    
 }
 
-void readContent(ifstream &file, vector<string> &fileContent){
+void readContent(fstream &file, vector<string> &fileContent){
     string line;
     //read line by line in vector
     while(!file.eof()){
         getline(file, line);
-        //add line to vector and add \n after each line;
-        fileContent.push_back(line + "\n");
+        //add line to vector and add \n after each line
+        if(!line.empty()){
+            fileContent.push_back(line);
+        }
     }
 
+}
+
+// count number of time a word exists in file
+void countWord(vector<string>&fileContent){
+    string wordForSearch;
+    cout << "Please, Enter word to search for: ";
+    cin >> wordForSearch;
+    
+    // convert to lower
+    transform(wordForSearch.begin(), wordForSearch.end(), wordForSearch.begin(), ::tolower);
+
+    // number of times word appear
+    int times = 0; 
+
+    //loop on every line
+    for(int i=0; i<fileContent.size(); i++){
+        string word;
+
+        // read word by word from line 
+        stringstream lineStream(fileContent[i]);
+
+        // loop on all word in line
+        while (!lineStream.eof()){
+
+            // read word
+            lineStream >> word;
+
+            // convert the word to lower case
+            transform(word.begin(), word.end(), word.begin(), ::tolower);
+        
+            if(word == wordForSearch){
+                times++;
+            }
+        }
+        
+    }
+
+    // print number of times word appear
+    cout << "\nThe word \"" << wordForSearch << "\" was found " << times << " times in the file\n";
+
+}
+
+// convert all word to upper case in file
+void toUpperFile(vector<string>&fileContent){
+
+    // loop on each line
+    for(int i=0; i<fileContent.size(); i++){
+        // loop on all character in line
+        for(int j=0; j<fileContent[i].size(); j++){
+            // check if it is charachter
+            if(isalpha(fileContent[i][j])){
+                //convert each character to upper
+                fileContent[i][j] = toupper(fileContent[i][j]);
+            }
+        }
+    }
+}
+
+//convert all word to lower case
+void toLowerFile(vector<string>&fileContent){
+    // loop on each line
+    for(int i=0; i<fileContent.size(); i++){
+        // loop on all character in line
+        for(int j=0; j<fileContent[i].size(); j++){
+            // check if it is charachter
+            if(isalpha(fileContent[i][j])){
+                // convert each character to lower
+                fileContent[i][j] = tolower(fileContent[i][j]);
+            }
+        }
+    }
+}
+
+// convert the begging of all word to upper case
+void toCapFile(vector<string>&fileContent){
+
+    // loop on every line
+    for(int i=0; i<fileContent.size(); i++){
+
+        stringstream lineStream(fileContent[i]);
+
+        string word;
+        // loop on every word
+        while(!lineStream.eof()){
+
+            lineStream >> word;
+
+            // find first index of the word
+            size_t indexWord = fileContent[i].find(word);
+
+            if(isalpha(word[0])){
+                // uppercase first letter
+                word[0] = toupper(word[0]);
+                // replace old word with new one
+                fileContent[i].replace(indexWord, word.size(), word);
+            }            
+        }
+        
+    }
+}
+
+void saveFile(vector<string>&fileContent, string &oldFileName){
+    string fileName;
+    cout << "Enter a new file name or press enter to save on the same file ===> ";
+    // remove \n from buffer
+    cin.ignore();
+    getline(cin, fileName);
+
+    cout << '\n';
+
+    // save on same file
+    if(fileName.empty()){
+        fstream file;
+        file.open(oldFileName, ios::out);
+        // loop on every line and write in same file
+        for(int i=0; i<fileContent.size(); i++){
+           file << fileContent[i] << '\n';
+       }
+       file.close();
+
+       file.open(oldFileName, ios::in);
+       fileContent.clear(); // delete any old content
+
+       // updated filecontent
+       readContent(file, fileContent);
+       file.close();
+
+    }else{ // save on different file
+
+        // open newfile for write
+        ofstream newFile(fileName);
+        
+        // write line by line on new file
+        for(int i=0; i<fileContent.size(); i++){
+            newFile << fileContent[i] << '\n';
+        }
+
+        newFile.close();
+    }
+    cout << "File is Saved\n";
 }
