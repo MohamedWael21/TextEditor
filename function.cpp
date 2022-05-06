@@ -290,3 +290,95 @@ void saveFile(vector<string>&fileContent, string &oldFileName){
     }
     cout << "File is Saved\n";
 }
+
+
+void numberOfWords(vector<string>&fileContent){ //numberofwords
+    // number of words in file
+    int words = 0;
+    // loop on every line in file
+    for(int i=0; i<fileContent.size(); i++){
+        stringstream lineStream(fileContent[i]);
+        string word;
+        //loop on each word
+        while(lineStream>>word){
+            words++;
+        }
+    }
+
+    cout<<"number of words: "<< words << '\n';
+    
+}
+
+
+void searchForWordInFile(vector<string>&fileContent)
+{               
+    string searchWord;
+    cout << "Enter the word to search: ";
+    cin >> searchWord;
+    // conver word lo lower case
+    transform(searchWord.begin(), searchWord.end(), searchWord.begin(), ::tolower);
+
+    // loop on every line
+    for(int i=0; i<fileContent.size(); i++){
+        stringstream lineStream(fileContent[i]);
+        string word;
+        // loop on every word;
+        while(lineStream >> word){
+            transform(word.begin(), word.end(), word.begin(), ::tolower);
+            if(word == searchWord){ // word found
+                cout << "Word was found in File\n";
+                return;
+            }
+        }
+    }
+
+    // word was not found 
+    cout << "Word was not found in the file\n";
+}
+
+void numberOfLines(vector<string>&fileContent)
+{
+    cout << "Number of lines in File: " << fileContent.size() << '\n';    
+}
+
+void numberofcharters(vector<string>&fileContent)
+{
+    int characters = 0; // number of characters without space
+
+    // loop on every line
+    for(int i=0; i<fileContent.size(); i++){
+        stringstream lineStream(fileContent[i]);
+        // get every character
+        while(!lineStream.eof()){
+            char chr = lineStream.get();
+            // not space
+            if(!isspace(chr) && chr != EOF){
+                characters++;
+            }
+        }
+    }
+    cout << "Number of characters (without space): " << characters << '\n';
+}
+
+int mergeOfFiles(vector<string>&fileContent)
+{
+  ifstream file;
+  string fileName;
+  cout<<"Enter file name: ";
+  getline(cin,fileName);
+  file.open(fileName);
+
+  if(!file){
+     cout << "Invalid File Name\n" ;
+  }else{
+      //read line by line from file
+      string line;
+      while(!file.eof()){
+          getline(file, line);
+          fileContent.push_back(line);
+      }
+  }
+
+  file.close();
+}
+

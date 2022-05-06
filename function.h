@@ -19,5 +19,10 @@ void toUpperFile(vector<string>&);
 void toLowerFile(vector<string>&);
 void toCapFile(vector<string>&);
 void saveFile(vector<string>&, string&);
+void numberOfWords(vector<string>&);
+void searchForWordInFile(vector<string>&);
+void numberOfLines(vector<string>&);
+void numberofcharters(vector<string>&);
+void mergeOfFiles(vector<string>&);
 
 #endif
