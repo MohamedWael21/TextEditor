@@ -11,7 +11,7 @@
 
 // include all libraries
 #include <bits/stdc++.h>
-#include "function.cpp"
+#include "function.h"
 
 using namespace std;
 
