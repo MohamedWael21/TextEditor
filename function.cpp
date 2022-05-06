@@ -360,7 +360,7 @@ void numberofcharters(vector<string>&fileContent)
     cout << "Number of characters (without space): " << characters << '\n';
 }
 
-int mergeOfFiles(vector<string>&fileContent)
+void mergeOfFiles(vector<string>&fileContent)
 {
   ifstream file;
   string fileName;
