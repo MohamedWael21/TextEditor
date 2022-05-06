@@ -29,6 +29,7 @@ int displayMenu(){
 
 
     cout << "Please Enter your choice ===> ";
+    
     //validate input 
     while(!(cin >> choice) || choice > 16 || choice < 1){
         //clear any flags and discard any invalid character from buffer
@@ -37,7 +38,7 @@ int displayMenu(){
 
         cout << "Please Enter your choice ===> ";
     }
-    
+    cout << endl;
     return choice;
 }
 
@@ -45,19 +46,19 @@ int displayMenu(){
 void takeAction(int choice, vector<string> &fileContent, string &FileName){
     switch (choice){
     case 1:
-        //call function
+        appendText(fileContent);
         break;
     case 2:
-        //call function
+        diplayContent(fileContent);
         break;
     case 3:
-        //call function
+        emptyFile(fileContent);
         break;
     case 4:
-        //call function
+        EncryptFile(fileContent);
         break;
     case 5:
-        //call function
+        DecryptFile(fileContent);
         break;
     case 6:
         //call function
@@ -109,6 +110,45 @@ void readContent(fstream &file, vector<string> &fileContent){
         }
     }
 
+}
+
+// add text to the end of the file
+void appendText(vector<string>&fileContent){
+    
+    string appended_text{};
+    cin.ignore();
+    getline(cin, appended_text, '^');
+    appended_text[appended_text.size()-1] = '.';
+    fileContent.push_back(appended_text);
+    cin.clear();
+}
+
+// Show the content of the text on the console
+void diplayContent(vector<string> &fileContent){
+    
+    for(string line : fileContent)
+        cout << line << endl;
+}
+
+// delete the content of the file
+void emptyFile(vector<string> &fileContent){
+    fileContent.clear();
+}
+
+// Encrypt the file by shifting each character by one according to ASCII table
+void EncryptFile(vector<string>&fileContent){
+    for(int i = 0; i < fileContent.size(); i++)
+        for(int j = 0; j < fileContent[i].size(); j++)
+            fileContent[i][j]++;
+
+}
+
+
+// Decrypt the file
+void DecryptFile(vector<string>&fileContent){
+    for(int i = 0; i < fileContent.size(); i++)
+        for(int j = 0; j < fileContent[i].size(); j++)
+            fileContent[i][j]--;
 }
 
 // count number of time a word exists in file

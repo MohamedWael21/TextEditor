@@ -1,6 +1,6 @@
 /*
  * FCAI - programming 1 - 2022 - Assignment 4
- * Program Name :  mian.cpp
+ * Program Name :  main.cpp
  * Last Modification Date : 02/4/2022
  * Author1 and ID and Group:  Mohamed Wael Mohamed      20210361    S21
  * Author2 and ID and Group:  Ali Tarek Mohamed         20210245    S21
@@ -11,15 +11,15 @@
 
 // include all libraries
 #include <bits/stdc++.h>
-#include "function.h"
+#include "function.cpp"
 
 using namespace std;
 
-// main point of  program
+// main point of program
 int main(){
     string fileName;
     cout << "Welcome to Text Editor\n";
-    cout << "Please Enter File Name: ";
+    cout << "Please Enter File Name with the extension: ";
     cin >> fileName; // take filename from user
     
     //open file for read and write

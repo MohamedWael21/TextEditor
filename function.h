@@ -8,6 +8,11 @@ using namespace std;
 
 int displayMenu();
 void takeAction(int, vector<string>&, string&);
+void appendText(vector<string>&);
+void diplayContent(vector<string>&);
+void emptyFile(vector<string>&);
+void EncryptFile(vector<string>&);
+void DecryptFile(vector<string>&);
 void readContent(fstream&, vector<string>&);
 void countWord(vector<string>&);
 void toUpperFile(vector<string>&);
