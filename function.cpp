@@ -5,7 +5,7 @@
 #include "function.h"
 
 using namespace std;
-
+    
 // show menu to user and return choice
 int displayMenu(){
     int choice = 0;
@@ -117,7 +117,7 @@ void appendText(vector<string>&fileContent){
     
     string appended_text{};
     cin.ignore();
-    getline(cin, appended_text, '^');
+    getline(cin, appended_text, '\0');
     appended_text[appended_text.size()-1] = '.';
     fileContent.push_back(appended_text);
     cin.clear();
