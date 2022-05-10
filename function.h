@@ -22,7 +22,7 @@ void saveFile(vector<string>&, string&);
 void numberOfWords(vector<string>&);
 void searchForWordInFile(vector<string>&);
 void numberOfLines(vector<string>&);
-void numberofcharters(vector<string>&);
+void numberofcharacters(vector<string>&);
 void mergeOfFiles(vector<string>&);
 
 #endif

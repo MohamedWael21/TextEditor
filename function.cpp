@@ -61,19 +61,19 @@ void takeAction(int choice, vector<string> &fileContent, string &FileName){
         DecryptFile(fileContent);
         break;
     case 6:
-        //call function
+        mergeOfFiles(fileContent);
         break;
     case 7:
-        // call function
+        numberOfWords(fileContent);
         break;
     case 8:
-        //call function
+        numberofcharacters(fileContent);
         break;
     case 9:
-        //call function
+        numberOfLines(fileContent);
         break;
     case 10:
-        //call function
+        searchForWordInFile(fileContent);
         break;
      case 11:
         countWord(fileContent);
@@ -341,7 +341,7 @@ void numberOfLines(vector<string>&fileContent)
     cout << "Number of lines in File: " << fileContent.size() << '\n';    
 }
 
-void numberofcharters(vector<string>&fileContent)
+void numberofcharacters(vector<string>&fileContent)
 {
     int characters = 0; // number of characters without space
 
